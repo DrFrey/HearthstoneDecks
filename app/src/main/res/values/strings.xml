@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Hearthstone Deck Viewer</string>
+    <string name="input_deck_code">Paste deck code here</string>
+    <string name="add_deck_dialog_title">Add deck</string>
+    <string name="error_dialog_title">Error</string>
+    <string name="add_deck_button">Add</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="internet_error">Check your internet connection and try again</string>
+</resources>

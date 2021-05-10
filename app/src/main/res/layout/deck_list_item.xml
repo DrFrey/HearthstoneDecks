@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="deck"
+            type="com.example.hearthstonedecks.data.DeckDBItem" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/base_layout"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/hs_deck_background_edited"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/hero_image"
+            imageUrl="@{deck.hero.image}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp" />
+
+        <TextView
+            android:id="@+id/deck_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/hero_image"
+            android:paddingEnd="5dp"
+            android:text="@{deck.name}"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            android:textColor="@color/design_default_color_on_primary"
+            tools:text="deck name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deck_name"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@+id/hero_image"
+            android:paddingEnd="5dp"
+            android:text="@{deck.cardCount + `/30`}"
+            android:textAlignment="viewStart"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="18sp"
+            tools:text="30/30" />
+
+    </RelativeLayout>
+</layout>

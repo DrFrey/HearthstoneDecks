@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hearthstone Deck Viewer</string>
+    <string name="input_deck_code">Вставьте код колоды</string>
+    <string name="add_deck_dialog_title">Добавить колоду</string>
+    <string name="error_dialog_title">Ошибка</string>
+    <string name="add_deck_button">Добавить</string>
+    <string name="cancel_button">Отмена</string>
+</resources>
