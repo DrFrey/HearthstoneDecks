@@ -40,6 +40,12 @@ class DeckListViewModel(private val repository : DeckRepository) : ViewModel() {
             version = deck.version!!,
             name = "${deck.format} ${deck.classX?.name}"
         )
+
+    fun deleteDeck(deck: DeckDBItem) {
+        viewModelScope.launch {
+            repository.delete(deck)
+        }
+    }
 }
 
 class DeckListViewModelFactory(private val repository: DeckRepository) : ViewModelProvider.Factory {

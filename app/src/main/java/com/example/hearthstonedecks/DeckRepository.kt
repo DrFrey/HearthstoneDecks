@@ -34,6 +34,10 @@ class DeckRepository(private val deckDao: DeckDao) {
         deckDao.insertDeck(deck)
     }
 
+    suspend fun delete(deck: DeckDBItem) {
+        deckDao.deleteDeck(deck)
+    }
+
 
     // функции для получения данных от Blizzard
 

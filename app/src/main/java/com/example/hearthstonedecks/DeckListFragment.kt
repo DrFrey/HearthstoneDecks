@@ -58,12 +58,15 @@ class DeckListFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val position = viewHolder.adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        deleteDeck()
+                        var item = adapter.currentList[position]
+                        viewModel.deleteDeck(item)
                     }
                 }
 
             }
         )
+
+        swipeHelper.attachToRecyclerView(binding.deckListRecyclerView)
 
         return binding.root
     }
