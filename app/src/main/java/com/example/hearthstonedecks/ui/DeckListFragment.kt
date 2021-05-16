@@ -1,4 +1,4 @@
-package com.example.hearthstonedecks
+package com.example.hearthstonedecks.ui
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -9,11 +9,15 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hearthstonedecks.DeckApplication
+import com.example.hearthstonedecks.R
 import com.example.hearthstonedecks.databinding.DeckListFragmentBinding
 
-class DeckListFragment : Fragment() {
+class DeckListFragment : Fragment(), DeckListAdapter.OnItemClickListener {
 
     val viewModel : DeckListViewModel by viewModels {
         DeckListViewModelFactory(DeckApplication.repository)
@@ -47,6 +51,7 @@ class DeckListFragment : Fragment() {
             }
         })
 
+        //swipe helper
         val swipeHelper = ItemTouchHelper(
             object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
                 override fun onMove(
@@ -58,7 +63,7 @@ class DeckListFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val position = viewHolder.adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        var item = adapter.currentList[position]
+                        val item = adapter.currentList[position]
                         viewModel.deleteDeck(item)
                     }
                 }
@@ -67,6 +72,8 @@ class DeckListFragment : Fragment() {
         )
 
         swipeHelper.attachToRecyclerView(binding.deckListRecyclerView)
+
+        adapter.setOnItemClickListener(this)
 
         return binding.root
     }
@@ -91,17 +98,22 @@ class DeckListFragment : Fragment() {
         AlertDialog.Builder(context)
             .setTitle(R.string.add_deck_dialog_title)
             .setView(createDialog)
-            .setPositiveButton(R.string.add_deck_button) {dialog, _ ->
+            .setPositiveButton(R.string.add_deck_button) { dialog, _ ->
                 val code = text.text.toString()
                 if (code.isNotEmpty()) {
                     viewModel.importDeck(code)
                     dialog.dismiss()
                 }
             }
-            .setNegativeButton(R.string.cancel_button) {dialog, _ ->
+            .setNegativeButton(R.string.cancel_button) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()
             .show()
+    }
+
+    override fun onItemClick(position: Int) {
+        this.findNavController().navigate(DeckListFragmentDirections.actionMainScreenToDeckFragment(position))
+       // viewModel.navigateToDeckComplete()
     }
 }

@@ -5,6 +5,18 @@
 
     <fragment
         android:id="@+id/mainScreen"
-        android:name="com.example.hearthstonedecks.DeckListFragment"
-        android:label="MainScreen" />
+        android:name="com.example.hearthstonedecks.ui.DeckListFragment"
+        android:label="MainScreen" >
+        <action
+            android:id="@+id/action_mainScreen_to_deckFragment"
+            app:destination="@id/deckFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deckFragment"
+        android:name="com.example.hearthstonedecks.ui.DeckFragment"
+        android:label="DeckFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

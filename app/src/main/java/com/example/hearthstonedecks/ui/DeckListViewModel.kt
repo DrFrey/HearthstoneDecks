@@ -1,7 +1,8 @@
-package com.example.hearthstonedecks
+package com.example.hearthstonedecks.ui
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.hearthstonedecks.DeckRepository
 import com.example.hearthstonedecks.data.Deck
 import com.example.hearthstonedecks.data.DeckDBItem
 import kotlinx.coroutines.launch
@@ -46,6 +47,18 @@ class DeckListViewModel(private val repository : DeckRepository) : ViewModel() {
             repository.delete(deck)
         }
     }
+
+/*    private val _navigateToSelectedDeck = MutableLiveData<Int?>()
+    val navigateToSelectedDeck : LiveData<Int?>
+        get() = _navigateToSelectedDeck
+
+    fun navigateToDeck(deckId : Int) {
+        _navigateToSelectedDeck.value = deckId
+    }
+
+    fun navigateToDeckComplete() {
+        _navigateToSelectedDeck.value = null
+    }*/
 }
 
 class DeckListViewModelFactory(private val repository: DeckRepository) : ViewModelProvider.Factory {

@@ -12,15 +12,15 @@
     <RelativeLayout
         android:id="@+id/base_layout"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@drawable/hs_deck_background_edited"
+        android:layout_height="100dp"
+        android:background="@drawable/hs_deck_background"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/hero_image"
             imageUrl="@{deck.hero.image}"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/deck_name"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:layout_toEndOf="@+id/hero_image"
             android:paddingEnd="5dp"

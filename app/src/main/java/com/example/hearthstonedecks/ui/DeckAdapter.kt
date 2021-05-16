@@ -1,4 +1,4 @@
-package com.example.hearthstonedecks
+package com.example.hearthstonedecks.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hearthstonedecks.data.DeckDBItem
-import com.example.hearthstonedecks.databinding.DeckListItemBinding
+import com.example.hearthstonedecks.databinding.DeckFragmentBinding
+import com.example.hearthstonedecks.ui.DeckAdapter.DeckViewHolder
 
-class DeckListAdapter : ListAdapter<DeckDBItem, DeckListAdapter.DeckListViewHolder>(DeckComparator()) {
-    class DeckListViewHolder(private val binding: DeckListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class DeckAdapter : ListAdapter<DeckDBItem, DeckViewHolder>(DeckComparator()) {
+    class DeckViewHolder(val binding : DeckFragmentBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(deck: DeckDBItem) {
             binding.deck = deck
             binding.executePendingBindings()
@@ -27,12 +28,13 @@ class DeckListAdapter : ListAdapter<DeckDBItem, DeckListAdapter.DeckListViewHold
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckListViewHolder {
-        return DeckListViewHolder(DeckListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckViewHolder {
+        val binding = DeckFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DeckViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DeckListViewHolder, position: Int) {
-        holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: DeckViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
     }
-
 }
