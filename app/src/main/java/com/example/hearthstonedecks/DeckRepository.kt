@@ -38,6 +38,10 @@ class DeckRepository(private val deckDao: DeckDao) {
         deckDao.deleteDeck(deck)
     }
 
+    suspend fun getDeckById(deckId: Int): DeckDBItem {
+        return deckDao.getDeckById(deckId)
+    }
+
 
     // функции для получения данных от Blizzard
 

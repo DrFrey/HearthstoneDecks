@@ -5,31 +5,31 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hearthstonedecks.data.DeckDBItem
-import com.example.hearthstonedecks.databinding.DeckFragmentBinding
+import com.example.hearthstonedecks.data.Card
+import com.example.hearthstonedecks.databinding.CardListItemBinding
 import com.example.hearthstonedecks.ui.DeckAdapter.DeckViewHolder
 
-class DeckAdapter : ListAdapter<DeckDBItem, DeckViewHolder>(DeckComparator()) {
-    class DeckViewHolder(val binding : DeckFragmentBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(deck: DeckDBItem) {
-            binding.deck = deck
+class DeckAdapter : ListAdapter<Card, DeckViewHolder>(DeckComparator()) {
+    class DeckViewHolder(val binding : CardListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(card: Card) {
+            binding.card = card
             binding.executePendingBindings()
         }
     }
 
-    class DeckComparator : DiffUtil.ItemCallback<DeckDBItem>() {
-        override fun areItemsTheSame(oldItem: DeckDBItem, newItem: DeckDBItem): Boolean {
+    class DeckComparator : DiffUtil.ItemCallback<Card>() {
+        override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: DeckDBItem, newItem: DeckDBItem): Boolean {
+        override fun areContentsTheSame(oldItem: Card, newItem: Card): Boolean {
             return oldItem == newItem
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckViewHolder {
-        val binding = DeckFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CardListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DeckViewHolder(binding)
     }
 

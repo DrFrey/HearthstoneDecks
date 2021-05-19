@@ -2,6 +2,7 @@ package com.example.hearthstonedecks.ui
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,9 +40,9 @@ class DeckListFragment : Fragment(), DeckListAdapter.OnItemClickListener {
             showAddDeckDialog()
         }
 
-        viewModel.allDecks.observe(viewLifecycleOwner, { deck ->
-            deck.let {
-                adapter.submitList(deck)
+        viewModel.allDecks.observe(viewLifecycleOwner, { decks ->
+            decks.let {
+                adapter.submitList(decks)
             }
         })
 
@@ -113,7 +114,8 @@ class DeckListFragment : Fragment(), DeckListAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        this.findNavController().navigate(DeckListFragmentDirections.actionMainScreenToDeckFragment(position))
-       // viewModel.navigateToDeckComplete()
+        Log.d("___", "position : $position")
+        val id = adapter.currentList[position].id
+        this.findNavController().navigate(DeckListFragmentDirections.actionMainScreenToDeckFragment(id))
     }
 }

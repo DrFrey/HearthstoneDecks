@@ -8,6 +8,9 @@ interface DeckDao {
     @Query("SELECT * FROM decks")
     fun getAllDecks() : Flow<List<DeckDBItem>>
 
+    @Query("SELECT * FROM decks WHERE id = :deckId")
+    suspend fun getDeckById(deckId : Int) : DeckDBItem
+
     @Query("DELETE FROM decks")
     suspend fun deleteAll()
 

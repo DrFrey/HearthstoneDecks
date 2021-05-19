@@ -13,7 +13,7 @@ import com.example.hearthstonedecks.data.typeconverters.ClassTypeConverter
 import com.example.hearthstonedecks.data.typeconverters.HeroPowerTypeConverter
 import com.example.hearthstonedecks.data.typeconverters.HeroTypeConverter
 
-@Database(entities = arrayOf(DeckDBItem::class), version = 3)
+@Database(entities = arrayOf(DeckDBItem::class), version = 4)
 @TypeConverters(
     CardTypeConverter::class,
     ClassTypeConverter::class,

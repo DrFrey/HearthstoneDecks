@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "decks")
 data class DeckDBItem(
     @PrimaryKey(autoGenerate = true)
-    val id : Int? = null,
+    var id: Int,
 
     @ColumnInfo(name = "name")
-    var name : String = "",
+    var name: String = "",
 
     @ColumnInfo(name = "card_count")
     var cardCount: Int = 0,
