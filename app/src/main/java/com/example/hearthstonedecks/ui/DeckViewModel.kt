@@ -23,6 +23,7 @@ class DeckViewModel(private val deckId: Int, private val repository: DeckReposit
 
 }
 
+@Suppress("UNCHECKED_CAST")
 class DeckViewModelFactory(private var deckId: Int, private var repository: DeckRepository) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
