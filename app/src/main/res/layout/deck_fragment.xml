@@ -19,9 +19,15 @@
             android:id="@+id/base_layout"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/hs_deck_background"
+            imageInBackground="@{deck.hero.cropImage}"
             android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/hs_deck_background"
+                />
 
             <ImageView
                 android:id="@+id/hero_image"
@@ -42,8 +48,9 @@
                 android:paddingEnd="5dp"
                 android:text="@{deck.name}"
                 android:textAlignment="viewStart"
+                android:fontFamily="@font/pt_serif_bold"
                 android:textSize="18sp"
-                android:textColor="@color/design_default_color_on_primary"
+                android:textColor="@color/white"
                 tools:text="deck name" />
 
             <TextView
@@ -56,8 +63,9 @@
                 android:paddingEnd="5dp"
                 android:text="@{deck.cardCount + `/30`}"
                 android:textAlignment="viewStart"
-                android:textColor="@color/design_default_color_on_primary"
-                android:textSize="18sp"
+                android:fontFamily="@font/pt_serif_bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 tools:text="30/30" />
         </RelativeLayout>
 
