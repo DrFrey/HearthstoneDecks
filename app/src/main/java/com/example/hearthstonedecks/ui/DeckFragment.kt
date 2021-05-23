@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.hearthstonedecks.DeckApplication
 import com.example.hearthstonedecks.databinding.DeckFragmentBinding
 
-class DeckFragment : Fragment() {
+class DeckFragment : Fragment(), DeckAdapter.OnItemClickListener {
     private lateinit var binding: DeckFragmentBinding
     lateinit var adapter: DeckAdapter
 
@@ -31,6 +31,7 @@ class DeckFragment : Fragment() {
         }
 
         adapter = DeckAdapter()
+        adapter.setOnItemClickListener(this)
         binding.deckFragmentRecyclerView.adapter = adapter
 
         viewModel.deck.observe(viewLifecycleOwner, {
@@ -42,5 +43,14 @@ class DeckFragment : Fragment() {
             }
         })
         return binding.root
+    }
+
+    override fun onItemClick(position: Int) {
+        val slug = adapter.currentList[position].slug
+        slug?.let {
+            val dialog = CardInfoDialog(slug)
+            dialog.show(activity?.supportFragmentManager!!, null)
+        }
+
     }
 }
