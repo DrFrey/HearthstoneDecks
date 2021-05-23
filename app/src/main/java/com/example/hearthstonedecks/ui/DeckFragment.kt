@@ -32,14 +32,18 @@ class DeckFragment : Fragment(), DeckAdapter.OnItemClickListener {
 
         adapter = DeckAdapter()
         adapter.setOnItemClickListener(this)
+
         binding.deckFragmentRecyclerView.adapter = adapter
 
-        viewModel.deck.observe(viewLifecycleOwner, {
-            Log.d("___","in fragment. deck = $it")
-            it?.let {
-                binding.deck = it
-                adapter.submitList(it.cards)
-                Log.d("___","cards: ${it.cards}")
+        viewModel.deck.observe(viewLifecycleOwner, { deckDBItem ->
+            Log.d("___","in fragment. deck = $deckDBItem")
+            deckDBItem?.let { deck ->
+                binding.deck = deck
+                val listToSubmit = deck.cards.sortedBy {
+                    it.manaCost
+                }
+                adapter.submitList(listToSubmit)
+                Log.d("___","cards: ${deck.cards}")
             }
         })
         return binding.root
