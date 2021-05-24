@@ -5,29 +5,43 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.example.hearthstonedecks.DeckApplication
+import androidx.fragment.app.viewModels
 import com.example.hearthstonedecks.databinding.CardInfoDialogBinding
-import kotlinx.coroutines.runBlocking
 
-class CardInfoDialog(private val slug: String) : DialogFragment() {
-    private val repository = DeckApplication.repository
+class CardInfoDialog : DialogFragment() {
+
     lateinit var binding: CardInfoDialogBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = CardInfoDialogBinding.inflate(LayoutInflater.from(context))
-        binding.lifecycleOwner = this
-        runBlocking {
-            binding.card = repository.getCard(slug)
+
+        val slug = arguments?.getString(SLUG) ?: ""
+
+        val viewmodel : CardInfoDialogViewModel by viewModels {
+            CardInfoDialogViewModelFactory(slug)
         }
 
-    }
+        viewmodel.card.observe(this, {
+            binding.card = it
+        })
+        binding.lifecycleOwner = this
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = AlertDialog.Builder(requireActivity())
             .setView(binding.root)
             .create()
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         return dialog
+    }
+
+    companion object {
+        const val SLUG = "SLUG"
+
+        fun newInstance(slug: String) : CardInfoDialog {
+            val dialog = CardInfoDialog()
+            val args = Bundle()
+            args.putString(SLUG, slug)
+            dialog.arguments = args
+            return dialog
+        }
     }
 }

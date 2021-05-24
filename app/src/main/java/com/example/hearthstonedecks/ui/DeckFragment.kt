@@ -52,7 +52,7 @@ class DeckFragment : Fragment(), DeckAdapter.OnItemClickListener {
     override fun onItemClick(position: Int) {
         val slug = adapter.currentList[position].slug
         slug?.let {
-            val dialog = CardInfoDialog(slug)
+            val dialog = CardInfoDialog.newInstance(slug)
             dialog.show(activity?.supportFragmentManager!!, null)
         }
 
